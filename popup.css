@@ -4,18 +4,17 @@
 
 
 * {
-
     font-family: 'Rubik', sans-serif;
 }
 ul {
     list-style-type: none;
-    margin:5px;
+    margin: 5px;
+    padding: 0px;
     background-color: yellowgreen;
 }
 
 li{
     background-color: red;
-    margin-left:5px;
 }
 
 body {
@@ -44,7 +43,6 @@ button {
     font-size: 20px;
 }
 .items-head hr {
-    width: 20%;
     margin: 0px 30px;
     border: 1px solid #0b5aa2;
 }
@@ -54,18 +52,15 @@ button {
 }
 .items-body-content {
     padding: 10px;
-    padding-right: 0px;
-    display: grid;
     grid-template-columns: 10fr 1fr;
     font-size: 13px;
-    grid-gap: 10px;
     border: 1px solid transparent;
     cursor: pointer;
     background-color: blue;
 }
 
 .items-body-content i {
-    align-self: start;
+    align-self: center;
     font-size: 15px;
     color: #0b5aa2;
     font-weight: bold;

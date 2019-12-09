@@ -4,11 +4,16 @@ let addUrlButton = document.getElementById("addUrlButton");
 let urlList = document.getElementById("urlList");
 let deleteAllButton = document.getElementById("deleteAllButton");
 
+String.prototype.trunc = String.prototype.trunc ||
+    function(n){
+        return (this.length > n) ? this.substr(0, n-1) + '...' : this;
+    };
+
 function createListItem(item) {
     let img = document.createElement("img");
     let a = document.createElement("a");
     a.href = item.url;
-    a.text = item.title;
+    a.text = item.title.trunc(30);
     a.target = "_blank";
     img.src = item.fav;
     img.width = 20;
@@ -23,19 +28,22 @@ function createListItem(item) {
     };
 
     let li = document.createElement("li");
+    li.width = urlList.width;
     urlList.appendChild(li);
     li.appendChild(img);
     li.appendChild(a);
     li.appendChild(finishButton);
 }
 
-getAll(function (urls) {
-    urls.forEach(function(url) {
-        if (!url.finished) {
-            createListItem(url);
-        }
+function fillList() {
+    getAll(function (urls) {
+        urls.forEach(function(url) {
+            if (!url.finished) {
+                createListItem(url);
+            }
+        });
     });
-});
+}
 
 addUrlButton.onclick = function(element) {
     add(
@@ -53,4 +61,4 @@ deleteAllButton.onclick = function(element) {
     });
 };
 
-
+fillList();
