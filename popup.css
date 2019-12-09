@@ -24,8 +24,8 @@ body {
 
 
 button {
-    height: 48px;
-    width: 48px;
+    height: 30px;
+    width: 30px;
     outline: none;
     background-color: yellowgreen;
 }
@@ -49,8 +49,6 @@ button {
     border: 1px solid #0b5aa2;
 }
 .items-body {
-    padding: 10px;
-    margin: 10px;
     display: grid;
     grid-gap: 10px;
 }
@@ -67,7 +65,7 @@ button {
 }
 
 .items-body-content i {
-    align-self: center;
+    align-self: start;
     font-size: 15px;
     color: #0b5aa2;
     font-weight: bold;

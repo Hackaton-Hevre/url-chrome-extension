@@ -1,6 +1,8 @@
-let addUrl = document.getElementById("addUrl");
+import { getAll, add, deleteAll, updateOne } from "./urls-module/urls-service.js"
+
+let addUrlButton = document.getElementById("addUrlButton");
 let urlList = document.getElementById("urlList");
-let deleteAll = document.getElementById("deleteAll");
+let deleteAllButton = document.getElementById("deleteAllButton");
 
 function createListItem(item) {
     let img = document.createElement("img");
@@ -12,53 +14,41 @@ function createListItem(item) {
     img.width = 20;
     img.height= 20;
 
+    let finishButton = document.createElement("button");
+    finishButton.onclick = function() {
+        item.finished = true;
+        updateOne(item, function() {
+            finishButton.style.backgroundColor = "blue"
+        });
+    };
+
     let li = document.createElement("li");
     urlList.appendChild(li);
     li.appendChild(img);
     li.appendChild(a);
+    li.appendChild(finishButton);
 }
 
-chrome.storage.sync.get("urls", function(result) {
-    if (result.urls === undefined) {
-        return;
-    }
-
-    result.urls.forEach(function (item) {
-        if (!item.finished) {
-            createListItem(item);
+getAll(function (urls) {
+    urls.forEach(function(url) {
+        if (!url.finished) {
+            createListItem(url);
         }
     });
 });
 
-addUrl.onclick = function(element) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        const tab = tabs[0];
-        if (tab === undefined) {
-            alert("Error with the url please try again later");
-            return;
-        }
-        chrome.storage.sync.get("urls", function(result) {
-            let urls = result.urls;
-            if (urls === undefined) {
-                urls = [];
-            }
-            const urlObj = {
-                title: tab.title,
-                fav: tab.favIconUrl,
-                url: tab.url,
-                finished:false
-            };
-            urls.push(urlObj);
-            chrome.storage.sync.set({urls: urls}, function() {
-                createListItem(urlObj)
-            });
+addUrlButton.onclick = function(element) {
+    add(
+        function(url) {
+            createListItem(url);
+        },
+        function(message) {
+            alert(message);
         });
-    });
 };
 
-
-deleteAll.onclick = function(element) {
-    chrome.storage.sync.remove(["urls"],function() {
+deleteAllButton.onclick = function(element) {
+    deleteAll(function() {
         urlList.innerHTML ='';
     });
 };
