@@ -1,12 +1,14 @@
-const getAll = async function(callback) {
+import { Url } from "./model/url.js"
+
+export async function getAll() {
     const result = await chrome.storage.sync.get("urls");
     if (result.urls === undefined) {
         return;
     }
     return result.urls;
-};
+}
 
-const add = async function() {
+export async function add() {
     const tabs = await chrome.tabs.query({active: true, currentWindow: true});
     const tab = tabs[0];
     if (tab === undefined) {
@@ -17,12 +19,7 @@ const add = async function() {
     if (urls === undefined) {
         urls = [];
     }
-    const urlObj = {
-        title: tab.title,
-        fav: tab.favIconUrl,
-        url: tab.url,
-        finished:false
-    };
+    const urlObj = new Url(tab.url, tab.title, tab.favIconUrl, false);
     const existing = urls.find(function(item) {
         return item.url === urlObj.url && !item.finished;
     });
@@ -33,13 +30,13 @@ const add = async function() {
     urls.push(urlObj);
     await chrome.storage.sync.set({urls: urls});
     return urlObj;
-};
+}
 
-const deleteAll = async function() {
+export async function deleteAll() {
     await chrome.storage.sync.remove(["urls"]);
-};
+}
 
-const updateOne = async function(urlObj) {
+export async function updateOne(urlObj) {
     const result = await chrome.storage.sync.get("urls");
     let urls = result.urls;
     urls = urls.filter(function(item) {
@@ -47,11 +44,4 @@ const updateOne = async function(urlObj) {
     });
     urls.push(urlObj);
     await chrome.storage.sync.set({urls: urls});
-};
-
-export {
-    getAll,
-    add,
-    deleteAll,
-    updateOne,
 }

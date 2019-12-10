@@ -1,11 +1,11 @@
-import { getAll, add, deleteAll, updateOne } from "./urls-module/urls-service.js"
+import * as urlsService from "./urls-module/urls-service.js"
 
 let addUrlButton = document.getElementById("addUrlButton");
 let urlList = document.getElementById("urlList");
 let deleteAllButton = document.getElementById("deleteAllButton");
 
 String.prototype.trunc = String.prototype.trunc ||
-    function(n){
+    function(n) {
         return (this.length > n) ? this.substr(0, n-1) + '...' : this;
     };
 
@@ -23,7 +23,7 @@ function createListItem(item) {
     finishButton.style.backgroundColor = item.finished ? "blue" : "yellowgreen";
     finishButton.onclick = async function() {
         item.finished = !item.finished;
-        await updateOne(item);
+        await urlsService.updateOne(item);
         finishButton.style.backgroundColor = item.finished ? "blue" : "yellowgreen";
     };
 
@@ -35,7 +35,7 @@ function createListItem(item) {
 }
 
 async function fillList() {
-    const urls = await getAll();
+    const urls = await urlsService.getAll();
     urls.forEach(function(url) {
         if (!url.finished) {
             createListItem(url);
@@ -45,16 +45,18 @@ async function fillList() {
 
 addUrlButton.onclick = async function(element) {
     try {
-        const url = await add();
+        const url = await urlsService.add();
         createListItem(url);
-    } catch (e) {
-        alert(e)
+    } catch (message) {
+        alert(message)
     }
 };
 
 deleteAllButton.onclick = async function(element) {
-    await deleteAll();
+    await urlsService.deleteAll();
     urlList.innerHTML = '';
 };
 
-fillList().then();
+fillList()
+    .then(() => console.log("Initialized successfully"))
+    .catch((error) => console.error(error));

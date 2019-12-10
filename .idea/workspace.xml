@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb0569da-95ea-4a85-93a3-512346de436a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/chrome-extension-async.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/urls-module/model/url.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/popup.css" beforeDir="false" afterPath="$PROJECT_DIR$/popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/popup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/popup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/urls-module/urls-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/urls-module/urls-service.js" afterDir="false" />
     </list>
@@ -52,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575828411084</updated>
-      <workItem from="1575828412275" duration="12017000" />
+      <workItem from="1575828412275" duration="14550000" />
     </task>
     <servers />
   </component>
