@@ -10,11 +10,9 @@ ul {
     list-style-type: none;
     margin: 5px;
     padding: 0px;
-    background-color: yellowgreen;
 }
 
 li{
-    background-color: red;
 }
 
 body {
@@ -43,7 +41,7 @@ button {
     font-size: 20px;
 }
 .items-head hr {
-    margin: 0px 30px;
+    margin: 0px 10px;
     border: 1px solid #0b5aa2;
 }
 .items-body {
@@ -56,7 +54,6 @@ button {
     font-size: 13px;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color: blue;
 }
 
 .items-body-content i {

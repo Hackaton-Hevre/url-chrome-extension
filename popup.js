@@ -20,45 +20,41 @@ function createListItem(item) {
     img.height= 20;
 
     let finishButton = document.createElement("button");
-    finishButton.onclick = function() {
-        item.finished = true;
-        updateOne(item, function() {
-            finishButton.style.backgroundColor = "blue"
-        });
+    finishButton.style.backgroundColor = item.finished ? "blue" : "yellowgreen";
+    finishButton.onclick = async function() {
+        item.finished = !item.finished;
+        await updateOne(item);
+        finishButton.style.backgroundColor = item.finished ? "blue" : "yellowgreen";
     };
 
     let li = document.createElement("li");
-    li.width = urlList.width;
     urlList.appendChild(li);
     li.appendChild(img);
     li.appendChild(a);
     li.appendChild(finishButton);
 }
 
-function fillList() {
-    getAll(function (urls) {
-        urls.forEach(function(url) {
-            if (!url.finished) {
-                createListItem(url);
-            }
-        });
+async function fillList() {
+    const urls = await getAll();
+    urls.forEach(function(url) {
+        if (!url.finished) {
+            createListItem(url);
+        }
     });
 }
 
-addUrlButton.onclick = function(element) {
-    add(
-        function(url) {
-            createListItem(url);
-        },
-        function(message) {
-            alert(message);
-        });
+addUrlButton.onclick = async function(element) {
+    try {
+        const url = await add();
+        createListItem(url);
+    } catch (e) {
+        alert(e)
+    }
 };
 
-deleteAllButton.onclick = function(element) {
-    deleteAll(function() {
-        urlList.innerHTML ='';
-    });
+deleteAllButton.onclick = async function(element) {
+    await deleteAll();
+    urlList.innerHTML = '';
 };
 
-fillList();
+fillList().then();
