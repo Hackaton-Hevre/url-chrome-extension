@@ -10,10 +10,15 @@ import {AppService} from './app.service';
 
 export class AppComponent implements OnInit {
   urls: Url[] = [];
+  dataReady = false;
   constructor(private appService: AppService) { }
 
-  async ngOnInit() {
-    this.urls = await this.appService.getAll();
+  ngOnInit() {
+    this.appService.getAll()
+      .then(urls => {
+        this.urls = urls;
+        this.dataReady = true;
+      });
   }
 
   async addUrlButtonPressed() {

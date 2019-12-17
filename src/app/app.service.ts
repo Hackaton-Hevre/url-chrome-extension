@@ -5,6 +5,8 @@ export class AppService {
   }
 
   async getAll(): Promise<Url[]> {
+    // uncomment this to simulate a long loading and see how the ui reacts
+    // await new Promise( resolve => setTimeout(resolve, 1000));
     const result = await chrome.storage.sync.get('urls');
     if (result.urls === undefined) {
       return [];
