@@ -32,4 +32,10 @@ export class AppComponent implements OnInit {
     await this.appService.deleteAll();
     this.urls = [];
   }
+
+  async urlActionButtonPressed(i: number) {
+    const url: Url = this.urls[i];
+    url.finished = true;
+    await this.appService.updateOne(url);
+  }
 }

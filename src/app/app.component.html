@@ -1,10 +1,39 @@
-<div>
+<div id="demo">
   <button (click)="addUrlButtonPressed()">Add this URL</button>
   <button (click)="deleteAllButtonPressed()">Delete all</button>
   <div *ngIf="dataReady === false; else readyToShow">
     <p>Loading</p>
   </div>
   <ng-template #readyToShow>
+
+
+    <ul class="urlList">
+      <li style="display:inline-block" *ngFor="let url of urls; let i = index">
+        <div class="urlPlaceHolder" *ngIf="url.finished === false">
+          <div class="urlFvicon">
+            <img [src]="url.fav">
+          </div>
+          <div class="urlTitle">
+            {{url.title}}
+          </div>
+          <div class="urlActionButton">
+            <button (click)="urlActionButtonPressed(i)"></button>
+          </div>
+        </div>
+      </li>
+    </ul>
+
     <p>{{urls.length}}</p>
+
+
+
+
+
+
+
   </ng-template>
 </div>
+
+
+
+

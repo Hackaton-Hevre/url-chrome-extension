@@ -1,0 +1,19 @@
+#demo {
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.urlPlaceHolder{
+  height: 100px;
+  width: 300px;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.urlFvicon{
+
+}
+
+.urlTitle{
+
+}
