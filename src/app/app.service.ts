@@ -51,4 +51,8 @@ export class AppService {
     urls.push(urlObj);
     await chrome.storage.sync.set({urls});
   }
+
+  async openUrl(urlObj) {
+    await chrome.tabs.create({url: urlObj.url});
+  }
 }

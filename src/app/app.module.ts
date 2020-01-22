@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import 'chrome-extension-async/chrome-extension-async';
 import {AppService} from './app.service';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/typings/button';
+import {MatCardModule} from '@angular/material/typings/card';
 
 @NgModule({
   declarations: [
@@ -12,7 +15,10 @@ import {AppService} from './app.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatListModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [
     AppService

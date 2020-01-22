@@ -38,4 +38,9 @@ export class AppComponent implements OnInit {
     url.finished = true;
     await this.appService.updateOne(url);
   }
+
+  async openUrl(index: number) {
+    console.log(index);
+    await this.appService.openUrl(this.urls[index]);
+  }
 }
