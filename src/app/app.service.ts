@@ -1,4 +1,5 @@
-import { Url } from './model/url.model';
+import {Url} from './model/url.model';
+import {ExtensionApiError, UrlExistsError} from './model/url.errors';
 
 export class AppService {
   constructor() {
@@ -18,7 +19,7 @@ export class AppService {
     const tabs = await chrome.tabs.query({active: true, currentWindow: true});
     const tab = tabs[0];
     if (tab === undefined) {
-      throw new Error('Error with the url please try again later');
+      throw new ExtensionApiError('Error with the url please try again later');
     }
     const result = await chrome.storage.sync.get('urls');
     let urls = result.urls;
@@ -30,7 +31,7 @@ export class AppService {
       return item.url === urlObj.url && !item.finished;
     });
     if (existing) {
-      throw new Error('Url already exists');
+      throw new UrlExistsError('Url already exists');
     }
 
     urls.push(urlObj);
@@ -42,14 +43,15 @@ export class AppService {
     await chrome.storage.sync.remove(['urls']);
   }
 
-  async updateOne(urlObj) {
+  async updateOne(urlObj): Promise<Url[]> {
     const result = await chrome.storage.sync.get('urls');
     let urls = result.urls;
     urls = urls.filter(item => {
       return item.url !== urlObj.url;
     });
-    urls.push(urlObj);
+    // urls.push(urlObj);
     await chrome.storage.sync.set({urls});
+    return urls;
   }
 
   async openUrl(urlObj) {

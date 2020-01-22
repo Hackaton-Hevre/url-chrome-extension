@@ -1,4 +1,4 @@
-<div id="demo">
+<div>
   <button (click)="addUrlButtonPressed()">Add this URL</button>
   <button (click)="deleteAllButtonPressed()">Delete all</button>
   <div *ngIf="dataReady === false; else readyToShow">
@@ -8,32 +8,12 @@
 
 
     <mat-nav-list class="urlList">
-      <mat-list-item class="urlListItem" *ngFor="let url of urls; let i = index" (click)="openUrl(i)">
-        <!--        <div class="urlPlaceHolder" mat-row *ngIf="url.finished === false">-->
-<!--        <button matLine (click)="openUrl(i)"></button>-->
+      <a mat-list-item class="urlListItem" *ngFor="let url of activeUrls(); let i = index" (click)="listItemPressed(i)">
         <img matCardImage class="urlFavicon" [src]="url.fav">
         <p class="urlTitle">{{url.title}}</p>
-        <button (click)="urlActionButtonPressed(i)"></button>
-        <!--        </div>-->
-      </mat-list-item>
+        <button class="urlActionButton" (click)="urlActionButtonPressed(i, $event)"></button>
+      </a>
     </mat-nav-list>
-
-<!--    <mat-nav-list class="urlList">-->
-<!--      <button mat-list-item class="urlListItem" *ngFor="let url of urls; let i = index" (click)="openUrl(i)">-->
-<!--&lt;!&ndash;        <div class="urlPlaceHolder" mat-row *ngIf="url.finished === false">&ndash;&gt;-->
-<!--          <img matCardImage class="urlFavicon" [src]="url.fav">-->
-<!--          <p class="urlTitle">{{url.title}}</p>-->
-<!--          <button (click)="urlActionButtonPressed(i)"></button>-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </button>-->
-<!--    </mat-nav-list>-->
-
-
-
-
-
-
-
   </ng-template>
 </div>
 
